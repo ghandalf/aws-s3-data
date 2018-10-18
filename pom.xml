@@ -1,0 +1,170 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>ca.ghandalf.aws.s3</groupId>
+	<artifactId>aws-s3-data</artifactId>
+	<version>0.0.9</version>
+	<packaging>pom</packaging>
+
+	<name>aws-s3-data</name>
+	<description>Example uses to give a demo to my customers.</description>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.0.RC1</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	
+	<properties>
+		<spring.boot.version>2.1.0.RC1</spring.boot.version>
+		<spring.version>5.1.1.RELEASE</spring.version>
+		<spring.cloud.version>2.0.1.RELEASE</spring.cloud.version>
+		<spring.cloud.aws.version>2.0.0.RELEASE</spring.cloud.aws.version>
+		<spring.boot.maven.version>2.0.6.RELEASE</spring.boot.maven.version>		
+		
+		<ee-api.version>8.0</ee-api.version>
+		<amazon.sqs.version>1.0.4</amazon.sqs.version>
+		<commons.fileupload.version>1.3.3</commons.fileupload.version>
+		<hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
+		<maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
+		<testng.version>6.14.3</testng.version>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>10</java.version>
+		<maven.compiler.source>10</maven.compiler.source>
+		<maven.compiler.target>10</maven.compiler.target>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>spring-milestone</id>
+			<name>Spring Milestone</name>
+			<url>http://maven.springframework.org/milestone/</url>
+		</repository>
+		<repository>
+			<id>spring-release</id>
+			<name>Spring Release</name>
+			<url>http://repo.spring.io/release/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>ca.ghandalf.aws.s3</groupId>
+				<artifactId>aws-s3-domain</artifactId>
+				<version>${project.parent.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>ca.ghandalf.aws.s3</groupId>
+				<artifactId>aws-s3-service</artifactId>
+				<version>${project.parent.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${ee-api.version}</version>
+			</dependency>
+
+			<dependency>
+			    <groupId>org.springframework.cloud</groupId>
+			    <artifactId>spring-cloud-starter</artifactId>
+			    <version>${spring.cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-aws-messaging</artifactId>
+				<version>${spring.cloud.aws.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.amazonaws</groupId>
+				<artifactId>amazon-sqs-java-messaging-lib</artifactId>
+				<version>${amazon.sqs.version}</version>
+			</dependency>
+
+			<!-- Tools in the project -->
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons.fileupload.version}</version>
+			</dependency>
+
+			<!-- Spring framework cloud needs this libraries for his properties validations 
+				processing -->
+			<dependency>
+				<groupId>org.hibernate.validator</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate.validator.version}</version>
+			</dependency>
+
+			<!-- Tests dependencies -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<version>${spring.boot.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>${testng.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<modules>
+		<module>aws-s3-domain</module>
+		<module>aws-s3-service</module>
+	</modules>
+
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring.boot.maven.version}</version>
+				</plugin>
+				
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven.surefire.plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>${maven.surefire.plugin.version}</version>
+			</plugin>
+		</plugins>
+	</reporting>
+
+</project>
