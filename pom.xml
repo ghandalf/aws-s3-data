@@ -142,7 +142,6 @@
 		<module>aws-s3-service</module>
 	</modules>
 
-
 	<build>
 		<plugins>
 			<plugin>
