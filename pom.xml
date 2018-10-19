@@ -17,14 +17,13 @@
 		<version>2.1.0.RC1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	
+
 	<properties>
 		<spring.boot.version>2.1.0.RC1</spring.boot.version>
 		<spring.version>5.1.1.RELEASE</spring.version>
 		<spring.cloud.version>2.0.1.RELEASE</spring.cloud.version>
 		<spring.cloud.aws.version>2.0.0.RELEASE</spring.cloud.aws.version>
-		<spring.boot.maven.version>2.0.6.RELEASE</spring.boot.maven.version>		
-		
+
 		<ee-api.version>8.0</ee-api.version>
 		<amazon.sqs.version>1.0.4</amazon.sqs.version>
 		<commons.fileupload.version>1.3.3</commons.fileupload.version>
@@ -34,23 +33,28 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>10</java.version>
-		<maven.compiler.source>10</maven.compiler.source>
-		<maven.compiler.target>10</maven.compiler.target>
+		<java.version>jdk-11.0.1</java.version>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 	</properties>
 
 	<repositories>
 		<repository>
-			<id>spring-milestone</id>
-			<name>Spring Milestone</name>
-			<url>http://maven.springframework.org/milestone/</url>
+			<id>spring-repo</id>
+			<name>Spring Repository</name>
+			<url>https://repo.spring.io/release</url>
 		</repository>
 		<repository>
-			<id>spring-release</id>
-			<name>Spring Release</name>
-			<url>http://repo.spring.io/release/</url>
+			<id>spring-milestone</id>
+			<name>Spring Milestone Repository</name>
+			<url>https://repo.spring.io/milestone</url>
+		</repository>
+		<repository>
+			<id>spring-snapshot</id>
+			<name>Spring Snapshot Repository</name>
+			<url>https://repo.spring.io/snapshot</url>
 			<snapshots>
-				<enabled>false</enabled>
+				<enabled>true</enabled>
 			</snapshots>
 		</repository>
 	</repositories>
@@ -76,9 +80,9 @@
 			</dependency>
 
 			<dependency>
-			    <groupId>org.springframework.cloud</groupId>
-			    <artifactId>spring-cloud-starter</artifactId>
-			    <version>${spring.cloud.version}</version>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter</artifactId>
+				<version>${spring.cloud.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
@@ -95,7 +99,7 @@
 				<artifactId>spring-web</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>com.amazonaws</groupId>
 				<artifactId>amazon-sqs-java-messaging-lib</artifactId>
@@ -140,21 +144,78 @@
 
 
 	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.springframework.boot</groupId>
-					<artifactId>spring-boot-maven-plugin</artifactId>
-					<version>${spring.boot.maven.version}</version>
-				</plugin>
-				
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>${maven.surefire.plugin.version}</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<toolchains>
+						<jdk>
+							<version>jdk-11.0.1</version>
+							<vendor>oracle</vendor>
+						</jdk>
+					</toolchains>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<!-- To bad embedded maven in eclipse is 3.5.3 version -->
+									<version>[3.5.3,)</version>
+								</requireMavenVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<configuration>
+					<reportSets>
+						<reportSet>
+							<reports>
+								<report>dependency-updates-report</report>
+								<report>plugin-updates-report</report>
+								<report>property-updates-report</report>
+							</reports>
+						</reportSet>
+					</reportSets>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
 
 	<reporting>
