@@ -10,13 +10,17 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import ca.ghandalf.aws.s3.BaseTest;
 
-public class S3RepositoryTest extends BaseTest {
+@SpringBootTest(classes = { S3Repository.class })
+@ContextConfiguration
+public class S3RepositoryTest extends AbstractTestNGSpringContextTests {
 
   private static final Logger logger = LoggerFactory.getLogger(S3RepositoryTest.class);
 
@@ -25,6 +29,7 @@ public class S3RepositoryTest extends BaseTest {
 
   @Inject
   private S3Repository repository;
+  
   private String[] directories = {"jason", "ajeet", "sales", "procurement"};
 
   @BeforeClass

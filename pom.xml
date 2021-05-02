@@ -3,228 +3,64 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>ca.ghandalf.aws.s3</groupId>
-	<artifactId>aws-s3-data</artifactId>
-	<version>0.0.9</version>
-	<packaging>pom</packaging>
-
-	<name>aws-s3-data</name>
-	<description>Example uses to give a demo to my customers.</description>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.0.RC1</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<version>2.4.5</version>
+		<relativePath />
 	</parent>
 
+	<groupId>ca.ghandalf.aws.s3</groupId>
+	<artifactId>aws-s3-data</artifactId>
+	<version>1.1.0</version>
+	<packaging>pom</packaging>
+
+	<name>aws-s3-data</name>
+	<description>Example uses to give a demo to customers.</description>
+
 	<properties>
-		<spring.boot.version>2.1.0.RC1</spring.boot.version>
-		<spring.version>5.1.1.RELEASE</spring.version>
-		<spring.cloud.version>2.0.1.RELEASE</spring.cloud.version>
-		<spring.cloud.aws.version>2.0.0.RELEASE</spring.cloud.aws.version>
-
-		<ee-api.version>8.0</ee-api.version>
-		<amazon.sqs.version>1.0.4</amazon.sqs.version>
-		<commons.fileupload.version>1.3.3</commons.fileupload.version>
-		<hibernate.validator.version>6.0.13.Final</hibernate.validator.version>
-		<maven.surefire.plugin.version>2.22.1</maven.surefire.plugin.version>
-		<testng.version>6.14.3</testng.version>
-
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>jdk-11.0.1</java.version>
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
+		<java.version>16</java.version>
+
+		<spring.boot.version>2.4.5</spring.boot.version>
+		<spring.cloud.aws.version>3.0.2</spring.cloud.aws.version>
+		<spring.cloud.aws.version>2.2.6.RELEASE</spring.cloud.aws.version>
+		<spring.version>5.3.6</spring.version>
+		<spring.cloud.version>3.0.2</spring.cloud.version>
+
+		<amazon.sqs.version>1.0.8</amazon.sqs.version>
+		<commons.fileupload.version>1.4</commons.fileupload.version>
+		<ee-api.version>8.0.1</ee-api.version>
+		<hibernate.validator.version>7.0.1.Final</hibernate.validator.version>
+		<javax.version>1</javax.version>
+		<maven.surefire.plugin.version>3.0.0-M5</maven.surefire.plugin.version>
+		<toolchains.version>3.0.0</toolchains.version>
+
+		<testng.version>7.4.0</testng.version>
+		<current.version>1.0.0</current.version>
 	</properties>
 
-	<repositories>
-		<repository>
-			<id>spring-repo</id>
-			<name>Spring Repository</name>
-			<url>https://repo.spring.io/release</url>
-		</repository>
-		<repository>
-			<id>spring-milestone</id>
-			<name>Spring Milestone Repository</name>
-			<url>https://repo.spring.io/milestone</url>
-		</repository>
-		<repository>
-			<id>spring-snapshot</id>
-			<name>Spring Snapshot Repository</name>
-			<url>https://repo.spring.io/snapshot</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>ca.ghandalf.aws.s3</groupId>
-				<artifactId>aws-s3-domain</artifactId>
-				<version>${project.parent.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>ca.ghandalf.aws.s3</groupId>
-				<artifactId>aws-s3-service</artifactId>
-				<version>${project.parent.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>javax</groupId>
-				<artifactId>javaee-api</artifactId>
-				<version>${ee-api.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-starter</artifactId>
-				<version>${spring.cloud.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-aws-messaging</artifactId>
-				<version>${spring.cloud.aws.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-jms</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-web</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.amazonaws</groupId>
-				<artifactId>amazon-sqs-java-messaging-lib</artifactId>
-				<version>${amazon.sqs.version}</version>
-			</dependency>
-
-			<!-- Tools in the project -->
-			<dependency>
-				<groupId>commons-fileupload</groupId>
-				<artifactId>commons-fileupload</artifactId>
-				<version>${commons.fileupload.version}</version>
-			</dependency>
-
-			<!-- Spring framework cloud needs this libraries for his properties validations 
-				processing -->
-			<dependency>
-				<groupId>org.hibernate.validator</groupId>
-				<artifactId>hibernate-validator</artifactId>
-				<version>${hibernate.validator.version}</version>
-			</dependency>
-
-			<!-- Tests dependencies -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-test</artifactId>
-				<version>${spring.boot.version}</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.testng</groupId>
-				<artifactId>testng</artifactId>
-				<version>${testng.version}</version>
-				<scope>test</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-
 	<modules>
-		<module>aws-s3-domain</module>
-		<module>aws-s3-service</module>
+		<module>domain</module>
+		<module>service</module>
 	</modules>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-dependencies</artifactId>
+			<type>pom</type>
+			<version>2.4.5</version>
+		</dependency>
+	</dependencies>
+
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>${maven.compiler.source}</source>
-					<target>${maven.compiler.target}</target>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-toolchains-plugin</artifactId>
-				<version>1.1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>toolchain</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<toolchains>
-						<jdk>
-							<version>jdk-11.0.1</version>
-							<vendor>oracle</vendor>
-						</jdk>
-					</toolchains>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>enforce-maven</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<requireMavenVersion>
-									<!-- To bad embedded maven in eclipse is 3.5.3 version -->
-									<version>[3.5.3,)</version>
-								</requireMavenVersion>
-							</rules>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-				<configuration>
-					<reportSets>
-						<reportSet>
-							<reports>
-								<report>dependency-updates-report</report>
-								<report>plugin-updates-report</report>
-								<report>property-updates-report</report>
-							</reports>
-						</reportSet>
-					</reportSets>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-		</plugins>
 	</build>
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>${maven.surefire.plugin.version}</version>
-			</plugin>
-		</plugins>
-	</reporting>
 
 </project>

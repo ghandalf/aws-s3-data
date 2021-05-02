@@ -3,16 +3,15 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>aws-s3-domain</artifactId>
-	<packaging>jar</packaging>
-
-	<name>aws-s3-domain</name>
-
 	<parent>
 		<groupId>ca.ghandalf.aws.s3</groupId>
 		<artifactId>aws-s3-data</artifactId>
-		<version>0.0.9</version>
+		<version>1.1.0</version>
 	</parent>
+
+	<artifactId>domain</artifactId>
+	<packaging>jar</packaging>
+	<name>domain</name>
 
 	<dependencies>
 		<dependency>
@@ -22,6 +21,7 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
 		</dependency>
 	</dependencies>
 
