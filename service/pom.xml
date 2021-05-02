@@ -3,41 +3,43 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>aws-s3-service</artifactId>
-	<packaging>jar</packaging>
-
-	<name>aws-s3-service</name>
-
 	<parent>
 		<groupId>ca.ghandalf.aws.s3</groupId>
 		<artifactId>aws-s3-data</artifactId>
-		<version>0.0.9</version>
+		<version>1.0.0</version>
 	</parent>
+
+	<artifactId>service</artifactId>
+	<packaging>jar</packaging>
+	<name>service</name>
 
 	<dependencies>
 		<dependency>
 			<groupId>ca.ghandalf.aws.s3</groupId>
 			<artifactId>aws-s3-domain</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>${javax.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter</artifactId>
+			<version>${spring.cloud.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-aws-messaging</artifactId>
+			<version>${spring.cloud.aws.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<dependency>
@@ -46,33 +48,42 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>amazon-sqs-java-messaging-lib</artifactId>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 
-		<!-- Tools used in the project -->
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>amazon-sqs-java-messaging-lib</artifactId>
+			<version>${amazon.sqs.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
+			<version>${commons.fileupload.version}</version>
 		</dependency>
-
-		<!-- Spring framework cloud needs this libraries for his properties validations 
-			processing -->
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator.version}</version>
 		</dependency>
 
-		<!-- Tests dependencies -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<version>${spring.boot.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<build>
